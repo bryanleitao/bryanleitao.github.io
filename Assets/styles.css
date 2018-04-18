@@ -78,9 +78,7 @@ section:hover{
 	background: rgb(170, 162, 162);
 }
 
-h3>section:hover{
-	color: rgb(170, 162, 162);
-}
+
 #fixedbutton{
 	position: fixed;
 	bottom: 10px;
@@ -111,9 +109,16 @@ h3>section:hover{
     /* background-color: #555; Add a dark-grey background on hover */
 }
 
-.port-icon{
+.port-icon:after{
+	content: "";
+	clear: both;
+	display: table;
+}
+
+#portfolio img{
 	float: left;
-	width: 140px;
+	width: 20%;
+	margin: auto 2.5%;
 }
 
 .a-icon{
