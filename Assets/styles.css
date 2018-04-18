@@ -3,6 +3,7 @@
 	padding: 0px;
 	text-decoration: none;
 	list-style-type: none;
+	box-sizing: border-box; /*responsive*/
 }
 body{
 	background: rgb(197, 191, 191);
@@ -10,7 +11,7 @@ body{
 }
 
 .col{
-	float: left;
+	float: ;
 }
 main{
 	width: 100%;
@@ -20,7 +21,7 @@ main{
 }
 .img-avatar{
 	height: auto;
-    width: 200px;
+    width: 100%;
     border: 5px solid #464646;
     overflow: hidden;
     margin: 0 auto 15px;
@@ -37,13 +38,12 @@ img{
 	vertical-align: middle;
 }
 
-main{
-	min-width: 1200px; 
+#main{
+	
 }
 aside{
     position: fixed;
 	width: 20%;
-	min-width: 230px;
 	margin-right: 5% !important;
     margin-left: 5% !important;
 }
@@ -55,7 +55,8 @@ aside{
 	background: #CDF;
     margin: 10px 0px;
     padding: 5px 20px;
-    border-radius: 91 px;
+	border-radius: 91px;
+	min-width: 240px;
 }
 .nav-menu:hover{
 	background: rgb(140, 153, 179);
@@ -63,8 +64,7 @@ aside{
 
 article{
 	width: 65%;
-	min-width: 760px;
-	margin-left: 400px;
+	float: right;
 	margin-right:5% !important;
 }
 
@@ -123,4 +123,17 @@ section:hover{
 
 .a-icon{
 	display: inline-block;
+}
+
+@media only screen and (max-width: 640px){
+	article{
+		margin: 15px 0px !important;
+		width:100%;
+	}
+	aside{
+		text-align: center;
+		width: 50%;
+		margin: auto !important;
+		position: inherit !important;
+	}
 }
