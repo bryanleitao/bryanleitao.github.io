@@ -1,0 +1,121 @@
+*{
+	margin: 0px; 
+	padding: 0px;
+	text-decoration: none;
+	list-style-type: none;
+}
+body{
+	background: rgb(197, 191, 191);
+	font-family: 'Tajawal', sans-serif;
+}
+
+.col{
+	float: left;
+}
+main{
+	width: 100%;
+	height: auto;
+	min-height: 720px;
+	margin-top: 5%; 
+}
+.img-avatar{
+	height: auto;
+    width: 200px;
+    border: 5px solid #464646;
+    overflow: hidden;
+    margin: 0 auto 15px;
+    opacity: 1;
+    margin-bottom: 0;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+	transform: rotate(385deg);
+}
+img{
+	max-width: 100%;
+    height: auto;
+	vertical-align: middle;
+}
+
+main{
+	min-width: 1200px; 
+}
+aside{
+    position: fixed;
+	width: 20%;
+	min-width: 230px;
+	margin-right: 5% !important;
+    margin-left: 5% !important;
+}
+
+.section-nav{
+	margin-top: 50px;
+}
+.nav-menu{
+	background: #CDF;
+    margin: 10px 0px;
+    padding: 5px 20px;
+    border-radius: 91 px;
+}
+.nav-menu:hover{
+	background: rgb(140, 153, 179);
+}
+
+article{
+	width: 65%;
+	min-width: 760px;
+	margin-left: 400px;
+	margin-right:5% !important;
+}
+
+section{
+	background: rgb(239, 230, 230);
+	margin-bottom: 30px;
+	padding: 20px 50px;
+}
+
+section:hover{
+	background: rgb(170, 162, 162);
+}
+
+h3>section:hover{
+	color: rgb(170, 162, 162);
+}
+#fixedbutton{
+	position: fixed;
+	bottom: 10px;
+	right: 1250px;
+	width: 30px;
+}
+
+#myBtn {
+    display: none; /* Hidden by default */
+    /* position: fixed; Fixed/sticky position */
+    /* bottom: 5px; Place the button at the bottom of the page */
+    /* right: 18px; Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    /* border: none; Remove borders */
+    /* outline: none; Remove outline */
+	/* background-image: url("img/up-button.png"); Set a background color */
+	/* background-size: 30px; */
+	/* background-repeat: no-repeat; */
+    /* color: white; Text color */
+    /* cursor: pointer; Add a mouse pointer on hover */
+    /* padding: 15px; Some padding */
+    /* border-radius: 10px; Rounded corners */
+	/* font-size: 18px; Increase font size */
+	text-align: center;
+}
+
+#myBtn:hover {
+    /* background-color: #555; Add a dark-grey background on hover */
+}
+
+.port-icon{
+	float: left;
+	width: 140px;
+}
+
+.a-icon{
+	display: inline-block;
+}
