@@ -55,7 +55,7 @@ aside{
 	background: #CDF;
     margin: 10px 0px;
     padding: 5px 20px;
-	border-radius: 91px;
+	/* border-radius: 91px; */
 	min-width: 240px;
 }
 .nav-menu:hover{
