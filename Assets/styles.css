@@ -10,9 +10,7 @@ body{
 	font-family: 'Tajawal', sans-serif;
 }
 
-.col{
-	float: ;
-}
+
 main{
 	width: 100%;
 	height: auto;
@@ -38,9 +36,7 @@ img{
 	vertical-align: middle;
 }
 
-#main{
-	
-}
+
 aside{
     position: fixed;
 	width: 20%;
@@ -56,7 +52,7 @@ aside{
     margin: 10px 0px;
     padding: 5px 20px;
 	/* border-radius: 91px; */
-	min-width: 240px;
+	min-width: 100%;
 }
 .nav-menu:hover{
 	background: rgb(140, 153, 179);
@@ -105,10 +101,6 @@ section:hover{
 	text-align: center;
 }
 
-#myBtn:hover {
-    /* background-color: #555; Add a dark-grey background on hover */
-}
-
 .port-icon:after{
 	content: "";
 	clear: both;
@@ -125,9 +117,9 @@ section:hover{
 	display: inline-block;
 }
 
-@media only screen and (max-width: 640px){
+@media only screen and (max-width: 360px){
 	article{
-		margin: 15px 0px !important;
+		margin: 0px !important;
 		width:100%;
 	}
 	aside{
@@ -135,5 +127,32 @@ section:hover{
 		width: 100%;
 		margin: auto !important;
 		position: inherit !important;
+	}
+	.nav-menu{
+		width: 100%;
+	
+	}
+	#myBtn{
+		display: hide !important;
+	}
+}
+
+@media only screen and (max-width: 768px) and (min-width: 360px){
+	article{
+		margin: 15px 0px !important;
+		width: 65%;
+		float: right;
+	}
+	aside{
+		text-align: center;
+		width: 35%;
+		margin: 0px !important;
+	}
+	.nav-menu{
+		width: 20%;
+		margin: 0px !important;
+	}
+	#myBtn{
+		display: hide !important;
 	}
 }
