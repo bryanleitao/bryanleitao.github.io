@@ -10,6 +10,14 @@ body{
 	font-family: 'Tajawal', sans-serif;
 }
 
+h2{
+	margin-left: 35px;
+}
+
+h4{
+	margin-left: 65px;
+	font-size: 25px;
+}
 
 main{
 	width: 100%;
@@ -71,7 +79,7 @@ section{
 }
 
 section:hover{
-	background: rgb(170, 162, 162);
+	background: rgb(201, 196, 196);
 }
 
 
@@ -84,20 +92,7 @@ section:hover{
 
 #myBtn {
     display: none; /* Hidden by default */
-    /* position: fixed; Fixed/sticky position */
-    /* bottom: 5px; Place the button at the bottom of the page */
-    /* right: 18px; Place the button 30px from the right */
     z-index: 99; /* Make sure it does not overlap */
-    /* border: none; Remove borders */
-    /* outline: none; Remove outline */
-	/* background-image: url("img/up-button.png"); Set a background color */
-	/* background-size: 30px; */
-	/* background-repeat: no-repeat; */
-    /* color: white; Text color */
-    /* cursor: pointer; Add a mouse pointer on hover */
-    /* padding: 15px; Some padding */
-    /* border-radius: 10px; Rounded corners */
-	/* font-size: 18px; Increase font size */
 	text-align: center;
 }
 
