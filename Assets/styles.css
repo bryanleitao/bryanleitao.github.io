@@ -135,12 +135,12 @@ section:hover{
 @media only screen and (max-width: 768px) and (min-width: 360px){
 	article{
 		margin: 15px 0px !important;
-		width: 65%;
+		/* width: 65%; */
 		float: right;
 	}
 	aside{
 		text-align: center;
-		width: 35%;
+		/* width: 35%; */
 		margin: 0px !important;
 	}
 	.nav-menu{
