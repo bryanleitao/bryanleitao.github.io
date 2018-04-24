@@ -26,13 +26,12 @@ function extraerDinero() {
 
     var dinero = parseInt(prompt("Cuanto desea extraer? limite: $" + limiteExtraccion)); 
     var saldoAnterior = saldoCuenta;
-    var validacion;
     
-    validacion = validacionExtraccion(dinero);
-    validacion = validacionBilletes(dinero);
-    validacion = validacionSaldo(dinero);
+    estado = validacionExtraccion(dinero);
+    estado = validacionBilletes(dinero);
+    estado = validacionSaldo(dinero);
 
-    if(validacion.codigo == 1){
+    if(estado.codigo == 1){
         saldoCuenta -= dinero;
         
         alert("Has extraido: $" + dinero + 
@@ -41,7 +40,7 @@ function extraerDinero() {
 
         actualizarSaldoEnPantalla();
     }else{
-        alert(validacion.mensaje);
+        alert(estado.mensaje);
     }
 
     estado = actualizarEstado();
@@ -68,36 +67,41 @@ function pagarServicio() {
                         "\n4- Gas = $300"
                     );
     switch(opcion){
-        case "1":                    
+        case "1":                 
             estado = validacionSaldo(100);
-            console.log(estado.codigo == 1);
             if(estado.codigo == 1){
                 saldoCuenta -= 100;
+            }else{
+                alert(estado.mensaje);
             }
             break;
-       case 2:
+       case "2":
             estado = validacionSaldo(100);
             if(validacionSaldo(1500) == 1){
                 saldoCuenta -= 1500;
+            }else{
+                alert(estado.mensaje);
             }
             break;
-        case 3:
+        case "3":
             estado = validacionSaldo(100);
             if(estado.codigo == 1){
                 saldoCuenta -= 500;
+            }else{
+                alert(estado.mensaje);
             }
             break;
-        case 4:
+        case "4":
             estado = validacionSaldo(100);
             if(estado.codigo == 1){
                 saldoCuenta -= 300;
+            }else{
+                alert(estado.mensaje);
             }
             break;
-        default:
-            actualizarSaldoEnPantalla();
-            actualizarEstado();
     }
-
+    actualizarSaldoEnPantalla();
+    actualizarEstado();
 }
 
 function transferirDinero() {
@@ -125,8 +129,8 @@ function actualizarLimiteEnPantalla() {
 
 function actualizarEstado(){
     return {"codigo" : 1, 
-    "mensaje" : "Ok"
-    };
+            "mensaje" : "Ok"
+            };
 }
 
 function validacionExtraccion(dinero) {
