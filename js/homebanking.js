@@ -3,7 +3,7 @@ var nombreUsuario =  "Bryan A. Leitao";
 var saldoCuenta = 400;
 var limiteExtraccion = 200;
 var billetesDisponibles = 100;
-var error = actualizarError();
+var estado = actualizarEstado();
 
 //Ejecución de las funciones que actualizan los valores de las variables en el HTML
 cargarNombreEnPantalla();
@@ -44,7 +44,7 @@ function extraerDinero() {
         alert(validacion.mensaje);
     }
 
-    error = actualizarError();
+    estado = actualizarEstado();
 }
 
 function depositarDinero() {
@@ -61,16 +61,42 @@ function depositarDinero() {
 }
 
 function pagarServicio() {
-    // var opcion = prompt("Que servicio desea abonar?" +
-    //                     "\n1- Agua = $100"+
-    //                     "\n2- Looz = $1500"+
-    //                     "\n3- Internet = $500"+
-    //                     "\n4- Gas = $300"
-    //                     );
-    // switch(opcion){
-    //     case 1:
-    //         validacionSaldo();
-    // }
+    var opcion = prompt("Que servicio desea abonar?" +
+                        "\n1- Agua = $100"+
+                        "\n2- Looz = $1500"+
+                        "\n3- Internet = $500"+
+                        "\n4- Gas = $300"
+                    );
+    switch(opcion){
+        case "1":                    
+            estado = validacionSaldo(100);
+            console.log(estado.codigo == 1);
+            if(estado.codigo == 1){
+                saldoCuenta -= 100;
+            }
+            break;
+       case 2:
+            estado = validacionSaldo(100);
+            if(validacionSaldo(1500) == 1){
+                saldoCuenta -= 1500;
+            }
+            break;
+        case 3:
+            estado = validacionSaldo(100);
+            if(estado.codigo == 1){
+                saldoCuenta -= 500;
+            }
+            break;
+        case 4:
+            estado = validacionSaldo(100);
+            if(estado.codigo == 1){
+                saldoCuenta -= 300;
+            }
+            break;
+        default:
+            actualizarSaldoEnPantalla();
+            actualizarEstado();
+    }
 
 }
 
@@ -97,7 +123,7 @@ function actualizarLimiteEnPantalla() {
 
 //Funciones propias
 
-function actualizarError(){
+function actualizarEstado(){
     return {"codigo" : 1, 
     "mensaje" : "Ok"
     };
@@ -105,24 +131,24 @@ function actualizarError(){
 
 function validacionExtraccion(dinero) {
     if(dinero > limiteExtraccion){
-        error.codigo = 2;
-        error.mensaje = "Solo puede extraer hasta $" + limiteExtraccion;
+        estado.codigo = 2;
+        estado.mensaje = "Solo puede extraer hasta $" + limiteExtraccion;
     }
-    return error;
+    return estado;
 }
 
 function validacionSaldo(dinero) {
     if((saldoCuenta <= 0) || (saldoCuenta < dinero)){
-        error.codigo = 3;
-        error.mensaje = "Su saldo es de $" + saldoCuenta;
+        estado.codigo = 3;
+        estado.mensaje = "Su saldo es de $" + saldoCuenta;
     }
-    return error;
+    return estado;
 }
 
 function validacionBilletes(dinero) {
     if((dinero % billetesDisponibles) != 0 ){
-        error.codigo = 4;
-        error.mensaje = "Solo pueden ser dividendos multiplos de $" + billetesDisponibles;
+        estado.codigo = 4;
+        estado.mensaje = "Solo pueden ser dividendos multiplos de $" + billetesDisponibles;
     }
-    return error;
+    return estado;
 }
