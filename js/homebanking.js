@@ -64,18 +64,19 @@ function extraerDinero() {
 
 function depositarDinero() {
 
-        var dinero = parseInt(prompt("Cuanto desea depositar?")); 
-        var saldoAnterior = saldoCuenta;
+    var dinero = parseInt(prompt("Cuanto desea depositar?")); 
+    var saldoAnterior = saldoCuenta;
 
-        if(!isNaN(dinero)){
-            saldoCuenta += dinero;
+    if(!isNaN(dinero)){
+        saldoCuenta += dinero;
 
-            alert("Has depositado: $" + dinero + 
-            "\nSaldo anterior: $" + saldoAnterior +
-            "\nSaldo actual: $" + saldoCuenta);
-            actualizarSaldoEnPantalla();
-    }
+        alert("Has depositado: $" + dinero + 
+        "\nSaldo anterior: $" + saldoAnterior +
+        "\nSaldo actual: $" + saldoCuenta);
+        actualizarSaldoEnPantalla();
+    }else alert("Ingrese un numero valido"); 
 }
+
 function pagarServicio() {
     var mensaje = "Que servicio desea abonar?";
 
@@ -112,7 +113,43 @@ function pagarServicio() {
 }
 
 function transferirDinero() {
+    var dinero = parseInt(prompt("Cuanto desea transferir?"));
+    
+    if(!isNaN(dinero)){
+        estado = validacionSaldo(dinero);
 
+        if(estado.codigo == 1){
+            cuentaDestino = prompt("Ingrese el numero de cuenta.");
+            console.log(verificarCuenta(cuentaDestino));
+            if(verificarCuenta(cuentaDestino)){
+                saldoCuenta -= dinero;
+                alert("Se han transferido $" + dinero + "\na la cuenta: " + cuentaDestino);
+            }else alert(estado.mensaje);
+
+        }else alert("No es posible hacer la transferencia. " + estado.mensaje);
+    }else alert("Ingrese un numero valido");
+
+    actualizarSaldoEnPantalla();
+    estado = actualizarEstado();
+}
+
+function verificarCuenta(cuenta){
+    existe = false;
+    
+    i = 0;
+    
+    while(i < cuentasAmigas.length)
+        if(cuenta == cuentasAmigas[i].nroCuenta){
+            existe = true;
+            break;
+        }
+        else i++;
+
+    if(existe != true){
+        estado.codigo = 5; 
+        estado.mensaje = "La cuenta ingresada no esta dentro de sus cuentas amigas.";
+    }
+    return existe;
 }
 
 function iniciarSesion() {
