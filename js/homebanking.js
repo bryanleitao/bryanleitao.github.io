@@ -1,26 +1,41 @@
 //Declaración de variables
-var nombreUsuario =  "Bryan A. Leitao";
+var nombreUsuario = "Bryan A. Leitao";
 var saldoCuenta = 400;
 var limiteExtraccion = 200;
 var billetesDisponibles = 100;
 var estado = actualizarEstado();
-var servicios = [{"nombre" : "Agua", 
-                "importe" : 350},
-                {"nombre" : "Telefono", 
-                "importe" : 425},
-                {"nombre" : "Luz", 
-                "importe" : 210},
-                {"nombre" : "Internet", 
-                "importe" : 570},
-                ];
-var cuentasAmigas = [{"nombre" : "CA1",
-                     "nroCuenta": "12345"},
-                     {"nombre" : "CA1", 
-                     "nroCuenta": "67890"}
-                    ];
+var servicios = [{
+    "nombre": "Agua",
+    "importe": 350
+},
+{
+    "nombre": "Telefono",
+    "importe": 425
+},
+{
+    "nombre": "Luz",
+    "importe": 210
+},
+{
+    "nombre": "Internet",
+    "importe": 570
+},
+];
+var cuentasAmigas = [{
+    "nombre": "CA1",
+    "nroCuenta": "12345"
+},
+{
+    "nombre": "CA2",
+    "nroCuenta": "67890"
+}
+];
 
+
+var passwords = "1234";
 
 //Ejecución de las funciones que actualizan los valores de las variables en el HTML
+iniciarSesion();
 cargarNombreEnPantalla();
 actualizarSaldoEnPantalla();
 actualizarLimiteEnPantalla();
@@ -30,32 +45,32 @@ actualizarLimiteEnPantalla();
 
 function cambiarLimiteDeExtraccion() {
     var dinero = parseInt(prompt("De cuanto desea el limite de extraccion? minimo $100"));
-    
-    if(dinero >= 100){
-        limiteExtraccion = dinero; 
+
+    if (dinero >= 100) {
+        limiteExtraccion = dinero;
         alert("Su limite de extracion nuevo es de $" + limiteExtraccion);
         actualizarLimiteEnPantalla();
-    }else alert("Ingrese una denominacion mayor o igual a $100");
+    } else alert("Ingrese una denominacion mayor o igual a $100");
 }
 
 function extraerDinero() {
 
-    var dinero = parseInt(prompt("Cuanto desea extraer? limite: $" + limiteExtraccion)); 
+    var dinero = parseInt(prompt("Cuanto desea extraer? limite: $" + limiteExtraccion));
     var saldoAnterior = saldoCuenta;
-    
+
     estado = validacionExtraccion(dinero);
     estado = validacionBilletes(dinero);
     estado = validacionSaldo(dinero);
 
-    if(estado.codigo == 1){
+    if (estado.codigo == 1) {
         saldoCuenta -= dinero;
-        
-        alert("Has extraido: $" + dinero + 
-        "\nSaldo anterior: $" + saldoAnterior +
-        "\nSaldo actual: $" + saldoCuenta);
+
+        alert("Has extraido: $" + dinero +
+            "\nSaldo anterior: $" + saldoAnterior +
+            "\nSaldo actual: $" + saldoCuenta);
 
         actualizarSaldoEnPantalla();
-    }else{
+    } else {
         alert(estado.mensaje);
     }
 
@@ -64,24 +79,24 @@ function extraerDinero() {
 
 function depositarDinero() {
 
-    var dinero = parseInt(prompt("Cuanto desea depositar?")); 
+    var dinero = parseInt(prompt("Cuanto desea depositar?"));
     var saldoAnterior = saldoCuenta;
 
-    if(!isNaN(dinero)){
+    if (!isNaN(dinero)) {
         saldoCuenta += dinero;
 
-        alert("Has depositado: $" + dinero + 
-        "\nSaldo anterior: $" + saldoAnterior +
-        "\nSaldo actual: $" + saldoCuenta);
+        alert("Has depositado: $" + dinero +
+            "\nSaldo anterior: $" + saldoAnterior +
+            "\nSaldo actual: $" + saldoCuenta);
         actualizarSaldoEnPantalla();
-    }else alert("Ingrese un numero valido"); 
+    } else alert("Ingrese un numero valido");
 }
 
 function pagarServicio() {
     var mensaje = "Que servicio desea abonar?";
 
-    for(var i = 0; i < servicios.length; i++){
-        mensaje += "\n"+ (i+1) + " - " + servicios[i].nombre + " - $" + servicios[i].importe;
+    for (var i = 0; i < servicios.length; i++) {
+        mensaje += "\n" + (i + 1) + " - " + servicios[i].nombre + " - $" + servicios[i].importe;
     };
 
     var opcion = prompt(mensaje);
@@ -105,26 +120,26 @@ function pagarServicio() {
         alert("ingrese una opcion correcta");
     }
     */
-    switch(opcion){
-        case "1":                 
-        case "2":                 
-        case "3":                 
-        case "4":                 
-            importeServicio = servicios[opcion-1].importe;
-            nombreServicio = servicios[opcion-1].nombre;
+    switch (opcion) {
+        case "1":
+        case "2":
+        case "3":
+        case "4":
+            importeServicio = servicios[opcion - 1].importe;
+            nombreServicio = servicios[opcion - 1].nombre;
 
             estado = validacionSaldo(importeServicio);
-            
-            if(estado.codigo == 1){
+
+            if (estado.codigo == 1) {
                 saldoCuenta -= importeServicio;
                 alert("Se ha abonado " + nombreServicio + " $" + importeServicio)
-            }else{
+            } else {
                 alert("No se ha podido abonar el servicio " + nombreServicio + ". " + estado.mensaje);
             }
             break;
         default:
             alert("ingrese una opcion correcta");
-       
+
     }
     actualizarSaldoEnPantalla();
     estado = actualizarEstado();
@@ -132,20 +147,20 @@ function pagarServicio() {
 
 function transferirDinero() {
     var dinero = parseInt(prompt("Cuanto desea transferir?"));
-    
-    if(!isNaN(dinero)){
+
+    if (!isNaN(dinero)) {
         estado = validacionSaldo(dinero);
 
-        if(estado.codigo == 1){
+        if (estado.codigo == 1) {
             cuentaDestino = prompt("Ingrese el numero de cuenta.");
 
-            if(verificarCuenta(cuentaDestino)){
+            if (verificarCuenta(cuentaDestino)) {
                 saldoCuenta -= dinero;
                 alert("Se han transferido $" + dinero + "\na la cuenta: " + cuentaDestino);
-            }else alert(estado.mensaje);
+            } else alert(estado.mensaje);
 
-        }else alert("No es posible hacer la transferencia. " + estado.mensaje);
-    }else alert("Ingrese un numero valido");
+        } else alert("No es posible hacer la transferencia. " + estado.mensaje);
+    } else alert("Ingrese un numero valido");
 
     actualizarSaldoEnPantalla();
     estado = actualizarEstado();
@@ -153,7 +168,22 @@ function transferirDinero() {
 
 
 function iniciarSesion() {
+    var user = parseInt(prompt("Password:"));
 
+    if (!validarUser(user)) { 
+        alert("Contraseña incorrecta, se han retenido sus fondos para mayor seguridad.");
+        saldoCuenta = 0;
+    }else{
+        alert("Bienvenido: " + nombreUsuario + " a homeBanking.");
+    }
+        
+        
+}
+
+function validarUser(pass) {
+    if(pass == passwords)
+        return true;
+    return false;
 }
 
 //Funciones que actualizan el valor de las variables en el HTML
@@ -171,15 +201,15 @@ function actualizarLimiteEnPantalla() {
 
 //Funciones propias
 
-function actualizarEstado(){
-    console.log("actualizo estado");
-    return {"codigo" : 1, 
-            "mensaje" : "Ok"
-            };
+function actualizarEstado() {
+    return {
+        "codigo": 1,
+        "mensaje": "Ok"
+    };
 }
 
 function validacionExtraccion(dinero) {
-    if(dinero > limiteExtraccion){
+    if (dinero > limiteExtraccion) {
         estado.codigo = 2;
         estado.mensaje = "Solo puede extraer hasta $" + limiteExtraccion;
     }
@@ -187,7 +217,7 @@ function validacionExtraccion(dinero) {
 }
 
 function validacionSaldo(dinero) {
-    if((saldoCuenta <= 0) || (saldoCuenta < dinero)){
+    if ((saldoCuenta <= 0) || (saldoCuenta < dinero)) {
         estado.codigo = 3;
         estado.mensaje = "Su saldo es de $" + saldoCuenta;
     }
@@ -195,27 +225,27 @@ function validacionSaldo(dinero) {
 }
 
 function validacionBilletes(dinero) {
-    if((dinero % billetesDisponibles) != 0 ){
+    if ((dinero % billetesDisponibles) != 0) {
         estado.codigo = 4;
         estado.mensaje = "Solo pueden ser dividendos multiplos de $" + billetesDisponibles;
     }
     return estado;
 }
 
-function verificarCuenta(cuenta){
+function verificarCuenta(cuenta) {
     existe = false;
-    
+
     i = 0;
-    
-    while(i < cuentasAmigas.length)
-        if(cuenta == cuentasAmigas[i].nroCuenta){
+
+    while (i < cuentasAmigas.length)
+        if (cuenta == cuentasAmigas[i].nroCuenta) {
             existe = true;
             break;
         }
         else i++;
 
-    if(existe != true){
-        estado.codigo = 5; 
+    if (existe != true) {
+        estado.codigo = 5;
         estado.mensaje = "La cuenta ingresada no esta dentro de sus cuentas amigas.";
     }
     return existe;
