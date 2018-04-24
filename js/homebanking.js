@@ -86,7 +86,25 @@ function pagarServicio() {
 
     var opcion = prompt(mensaje);
 
-    
+    //recomiendo usar el condicional if ya q se hace mas dinamico
+    /*
+    if (opcion > 0 && opcion <= servicios.length){
+
+        importeServicio = servicios[opcion-1].importe;
+        nombreServicio = servicios[opcion-1].nombre;
+
+        estado = validacionSaldo(importeServicio);
+        
+        if(estado.codigo == 1){
+            saldoCuenta -= importeServicio;
+            alert("Se ha abonado " + nombreServicio + " $" + importeServicio)
+        }else{
+            alert("No se ha podido abonar el servicio " + nombreServicio + ". " + estado.mensaje);
+        }
+    }else{
+        alert("ingrese una opcion correcta");
+    }
+    */
     switch(opcion){
         case "1":                 
         case "2":                 
@@ -120,7 +138,7 @@ function transferirDinero() {
 
         if(estado.codigo == 1){
             cuentaDestino = prompt("Ingrese el numero de cuenta.");
-            console.log(verificarCuenta(cuentaDestino));
+
             if(verificarCuenta(cuentaDestino)){
                 saldoCuenta -= dinero;
                 alert("Se han transferido $" + dinero + "\na la cuenta: " + cuentaDestino);
@@ -133,24 +151,6 @@ function transferirDinero() {
     estado = actualizarEstado();
 }
 
-function verificarCuenta(cuenta){
-    existe = false;
-    
-    i = 0;
-    
-    while(i < cuentasAmigas.length)
-        if(cuenta == cuentasAmigas[i].nroCuenta){
-            existe = true;
-            break;
-        }
-        else i++;
-
-    if(existe != true){
-        estado.codigo = 5; 
-        estado.mensaje = "La cuenta ingresada no esta dentro de sus cuentas amigas.";
-    }
-    return existe;
-}
 
 function iniciarSesion() {
 
@@ -200,4 +200,23 @@ function validacionBilletes(dinero) {
         estado.mensaje = "Solo pueden ser dividendos multiplos de $" + billetesDisponibles;
     }
     return estado;
+}
+
+function verificarCuenta(cuenta){
+    existe = false;
+    
+    i = 0;
+    
+    while(i < cuentasAmigas.length)
+        if(cuenta == cuentasAmigas[i].nroCuenta){
+            existe = true;
+            break;
+        }
+        else i++;
+
+    if(existe != true){
+        estado.codigo = 5; 
+        estado.mensaje = "La cuenta ingresada no esta dentro de sus cuentas amigas.";
+    }
+    return existe;
 }
