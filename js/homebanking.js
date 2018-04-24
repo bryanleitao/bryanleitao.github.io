@@ -4,6 +4,21 @@ var saldoCuenta = 400;
 var limiteExtraccion = 200;
 var billetesDisponibles = 100;
 var estado = actualizarEstado();
+var servicios = [{"nombre" : "Agua", 
+                "importe" : 350},
+                {"nombre" : "Telefono", 
+                "importe" : 425},
+                {"nombre" : "Luz", 
+                "importe" : 210},
+                {"nombre" : "Internet", 
+                "importe" : 570},
+                ];
+var cuentasAmigas = [{"nombre" : "CA1",
+                     "nroCuenta": "12345"},
+                     {"nombre" : "CA1", 
+                     "nroCuenta": "67890"}
+                    ];
+
 
 //Ejecución de las funciones que actualizan los valores de las variables en el HTML
 cargarNombreEnPantalla();
@@ -18,6 +33,7 @@ function cambiarLimiteDeExtraccion() {
     
     if(dinero >= 100){
         limiteExtraccion = dinero; 
+        alert("Su limite de extracion nuevo es de $" + limiteExtraccion);
         actualizarLimiteEnPantalla();
     }else alert("Ingrese una denominacion mayor o igual a $100");
 }
@@ -51,57 +67,48 @@ function depositarDinero() {
         var dinero = parseInt(prompt("Cuanto desea depositar?")); 
         var saldoAnterior = saldoCuenta;
 
-        saldoCuenta += dinero;
+        if(!isNaN(dinero)){
+            saldoCuenta += dinero;
 
-        alert("Has depositado: $" + dinero + 
-        "\nSaldo anterior: $" + saldoAnterior +
-        "\nSaldo actual: $" + saldoCuenta);
-        actualizarSaldoEnPantalla();
+            alert("Has depositado: $" + dinero + 
+            "\nSaldo anterior: $" + saldoAnterior +
+            "\nSaldo actual: $" + saldoCuenta);
+            actualizarSaldoEnPantalla();
+    }
 }
-
 function pagarServicio() {
-    var opcion = prompt("Que servicio desea abonar?" +
-                        "\n1- Agua = $100"+
-                        "\n2- Looz = $1500"+
-                        "\n3- Internet = $500"+
-                        "\n4- Gas = $300"
-                    );
+    var mensaje = "Que servicio desea abonar?";
+
+    for(var i = 0; i < servicios.length; i++){
+        mensaje += "\n"+ (i+1) + " - " + servicios[i].nombre + " - $" + servicios[i].importe;
+    };
+
+    var opcion = prompt(mensaje);
+
+    
     switch(opcion){
         case "1":                 
-            estado = validacionSaldo(100);
+        case "2":                 
+        case "3":                 
+        case "4":                 
+            importeServicio = servicios[opcion-1].importe;
+            nombreServicio = servicios[opcion-1].nombre;
+
+            estado = validacionSaldo(importeServicio);
+            
             if(estado.codigo == 1){
-                saldoCuenta -= 100;
+                saldoCuenta -= importeServicio;
+                alert("Se ha abonado " + nombreServicio + " $" + importeServicio)
             }else{
-                alert(estado.mensaje);
+                alert("No se ha podido abonar el servicio " + nombreServicio + ". " + estado.mensaje);
             }
             break;
-       case "2":
-            estado = validacionSaldo(100);
-            if(validacionSaldo(1500) == 1){
-                saldoCuenta -= 1500;
-            }else{
-                alert(estado.mensaje);
-            }
-            break;
-        case "3":
-            estado = validacionSaldo(100);
-            if(estado.codigo == 1){
-                saldoCuenta -= 500;
-            }else{
-                alert(estado.mensaje);
-            }
-            break;
-        case "4":
-            estado = validacionSaldo(100);
-            if(estado.codigo == 1){
-                saldoCuenta -= 300;
-            }else{
-                alert(estado.mensaje);
-            }
-            break;
+        default:
+            alert("ingrese una opcion correcta");
+       
     }
     actualizarSaldoEnPantalla();
-    actualizarEstado();
+    estado = actualizarEstado();
 }
 
 function transferirDinero() {
@@ -128,6 +135,7 @@ function actualizarLimiteEnPantalla() {
 //Funciones propias
 
 function actualizarEstado(){
+    console.log("actualizo estado");
     return {"codigo" : 1, 
             "mensaje" : "Ok"
             };
