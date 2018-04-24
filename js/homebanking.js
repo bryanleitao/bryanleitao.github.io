@@ -170,18 +170,18 @@ function transferirDinero() {
 function iniciarSesion() {
     var user = parseInt(prompt("Password:"));
 
-    if (!validarUser(user)) { 
+    if (!validarUser(user)) {
         alert("Contraseña incorrecta, se han retenido sus fondos para mayor seguridad.");
         saldoCuenta = 0;
-    }else{
+    } else {
         alert("Bienvenido: " + nombreUsuario + " a homeBanking.");
     }
-        
-        
+
+
 }
 
 function validarUser(pass) {
-    if(pass == passwords)
+    if (pass == passwords)
         return true;
     return false;
 }
